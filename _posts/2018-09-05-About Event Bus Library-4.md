@@ -1,6 +1,6 @@
 ---
 layout: post
-titls: Event Bus Library 분석 - 내부 코드(unregister(), post())
+title: Event Bus Library 분석 - 내부 코드(unregister(), post())
 tags: [EventBus, Java, Android]
 ---
 
