@@ -96,6 +96,8 @@ public class Test1 {
 }
 
 ```
+코드의 실행결과는 다음과 같습니다.
+![Thread-safe]({{ site.baseurl }}/assets/img/pexels/Thread-Safe.png)
 
 위의 코드에서는 스레드간 공유해서 사용하고 있는 money 필드를 수정하는 메서드 spendMoney() 메서드에 synchronized 키워드를 사용하여 특정 스레드가 메서드를 사용중일 때는 다른 스레드에서 접근을 하지 못하게 하는 block 처리를 하였습니다.
 하지만 synchronized 키워드는 다른 스레드의 접근 자체를 블로킹 하기 때문에 공유자원을 사용하는 스레드가 늘어날수록 성능 저하가 심해집니다. Android에서는 대표적인 예로 특정 기능을 제공하는 싱글톤 객체 생성 시 싱글톤 객체가 synchronized 키워드를 사용해서 구현되어있으면 여러 스레드에서 접근 시 객체 생성 및 반환을 하는 동안 해당 스레드 이외에 다른 스레드는 싱글톤 객체를 얻을 수 없으므로 다른 방식으로 코드를 개선해야 합니다. 싱글톤 객체 디자인 패턴에 관한 내용은 [여기](https://medium.com/@joongwon/multi-thread-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%EC%9D%98-%EC%98%AC%EB%B0%94%EB%A5%B8-singleton-578d9511fd42) 를 참고해보시면 좋을 것 같습니다.
