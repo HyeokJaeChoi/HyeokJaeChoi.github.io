@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Event Bus Library 분석 - 내부 코드
+title: Event Bus Library 분석 - 내부 코드(getDefault(), register())
 ---
 
 지난 포스팅에는 EventBus 라이브러리가 하는 역할과 사용 방법에 대해서 살펴보았습니다. EventBus의 주요 특징으로 register(), unregister() 메서드로 이벤트를 구독과 해지하며 @Subscribe 어노테이션이 명시된 메서드에서 이벤트 수신처리 및 관련 코드를 작성하게 됩니다. 그러면 EventBus의 핵심 기능이라 할 수 있는 register()와 unregister()는 어떤 과정을 통해서 동작하는지 한번 살펴보겠습니다.
