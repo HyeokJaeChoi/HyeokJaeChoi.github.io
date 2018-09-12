@@ -8,4 +8,5 @@ tags: EventBus, Android, Java
 전체적인 동작 화면을 첨부해 드리니 참고하시면 되겠습니다
 ![video]({{ site.baseurl }}/assets/video/EventBusExample_video.mp4)
 
+
 소스코드는 제 GitHub 저장소에 업로드 되어 있으니 참고하시면 되겠습니다.[https://github.com/HyeokJaeChoi/EventBusExample](https://github.com/HyeokJaeChoi/EventBusExample)
