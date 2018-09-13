@@ -5,6 +5,7 @@ tags: Picasso, Android
 ---
 
 Android에서는 이미지 같은 대용량 리소스 파일들을 로컬, 원격에서 받아서 화면에 표시할 경우 리사이징, 캐싱 등을 사용하여 최대한 효율적으로 다뤄야 합니다. 특히 인터넷 상에서 네트워크 연결을 통해 이미지를 받아와 표시할 경우 네트워크 통신 비용 + 이미지 출력 비용이 같이 발생하므로 위에서 언급한 캐싱이 필수적으로 동작해야 합니다. 이번 글에서는 Android에서 사용하는 Image Opensource Library인 Picasso가 어떻게 캐싱을 처리하는지 알아보겠습니다.
+
 Picasso는 square사에서 만든 이미지 관련 라이브러리로 [https://github.com/square/picasso](https://github.com/square/picasso)에 소개가 되어있습니다. 자세한 사용방법은 [https://square.github.io/picasso](https://square.github.io/picasso)에 참고하시면 되겠습니다.
 Picasso는 In-memory Cache과 Storage Cache를 사용하여 이미지들을 캐싱하고 있습니다. In-memory Cache구현 방식은 Android의 LruCache<K key, V value> 타입의 클래스를 상속받아 PlatformLruCache 클래스를 정의하여 Picasso 객체가 사용되는 동안의 이미지들을 캐싱하고 있습니다. LruCache클래스는 [LastRecentlyUsed Cache](https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)) 알고리즘을 적용한 캐싱 클래스로 요소들을 새로 추가하거나 호출했을 경우 그 대상을 우선순위의 맨 앞으로 지정하고 만약 캐싱 크기가 꽉 찼을때 새로운 요소가 캐싱되어야 할 경우 우선순위가 제일 낮은 요소를 제거하는 로직을 사용하고 있습니다. 따라서 Picasso의 In-memory Cache는 자주 호출하는 이미지들이 더 빠른 속도로 호출되는 구조를 띄고 있습니다.
 Picasso는 이 In-memory Cache의 용량을 내부의 Utils.calculateMemoryCacheSize 메서드를 호출하여 크기를 할당하는데 어플리케이션의 매니페스트 파일에 largeHeap 여부에 따라 다른 메서드를 호출하여 어플리케이션이 사용가능한 메모리 크기를 구한 후 연산을 하여 사용가능한 메모리의 15% 정도까지를 캐시 영역으로 할당해주고 있습니다. 캐시 생성 코드는 다음과 같습니다.
