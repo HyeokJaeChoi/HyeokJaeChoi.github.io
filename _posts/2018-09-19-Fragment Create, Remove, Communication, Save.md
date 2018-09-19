@@ -10,7 +10,7 @@ tags: Android, Fragment
 
 Fragment를 생성, 제거하기 위해선 부모 Activity에서 FragmentManager와 FragmentTransaction을 생성해야합니다. FragmentManager는 getSupportFragmentManager() 메서드를 통해서 가져올 수 있고 FragmentTransaction은 FragmentManager.beginTransaction() 메서드를 통해서 가져올 수 있습니다.
 위의 두개의 객체를 얻어오면 firstFragment = new FirstFragment(), secondFragment = new SecondFragment() 로 객체를 생성한 다음 FragmentTransaction.add(R.id.container, firstFragment)로 빈 Fragment에 추가할 수 있으며 FragmentTransaction.replace(R.id.container, secondFragment) 메서드로 교체할 수 있습니다. 제거할 경우에는 FragmentTransction.remove(secondFragment)메서드를 사용하여 Activity 상에서 제거할 수 있습니다.
-###### 중요한 점은 모든 작업을 한 후에는 반드시 Transaction.commit() 메서드를 호출하여 작업결과를 Activity에 반영해야 합니다.
+### 중요한 점은 모든 작업을 한 후에는 반드시 Transaction.commit() 메서드를 호출하여 작업결과를 Activity에 반영해야 합니다.
 
 2. Fragment간 데이터 통신 방법
 
