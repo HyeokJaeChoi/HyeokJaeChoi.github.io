@@ -12,7 +12,7 @@ tags: Android, Fragment, Transition
 팁: 각 프래그먼트 트랜잭션에 대해 전환 애니메이션을 적용하려면 커밋하기 전에 setTransition()을 호출하면 됩니다.
 //Android Fragment 공식 문서
 ```
-setTransition() 메서드는 transit 이라는 int 타입의 값을 받고있는데 이 값으로 FragmentTransaction 클래스 내부에 있는 상수값을 사용하여 기본적인 전환 효과를 사용할 수 있습니다. 만약 Custom Animation을 사용하고 싶은 경우 setTransitionStyle() 메서드를 호출하여 인자값으로 R.id.custom_animation 타입으로 넣어주면 됩니다.
+setTransition() 메서드는 transit 이라는 int 타입의 값을 받고있는데 이 값으로 FragmentTransaction 클래스 내부에 있는 상수값을 사용하여 기본적인 전환 효과를 사용할 수 있습니다. 만약 Custom Animation을 사용하고 싶은 경우 setTransitionStyle() 메서드를 호출하여 인자값으로 R.anim.custom_animation 타입으로 넣어주면 됩니다.
 그럼 기본 값으로는 어떤 효과들을 사용할 수 있는지 살펴보겠습니다.
 
 `TRANSIT_FRAGMENT_OPEN`
