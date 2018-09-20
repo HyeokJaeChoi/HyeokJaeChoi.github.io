@@ -12,47 +12,47 @@ Fragment는 동작 또는 Activity 내에서 사용자 인터페이스의 일부
 ```
 즉 Fragment는 Activity 에 의존하는 수명주기를 가진 UI Container & Manager 라고 볼 수 있겠습니다. 그러면 Fragment는 어떤 생명 주기를 가지고 동작하는지 살펴보겠습니다.
 
-1. OnAttach(Context context)
+- OnAttach(Context context)
 
 Fragment가 Activity에 포함되어 속해졌을 때 호출됩니다. Context를 인자로 받아오는데 이를 사용하면 Activity에 있는 콜백 리스너 등을 가져와서 Activity <-> Fragment 통신이 가능하도록 하게 해줍니다.
 
-2. OnCreate(Bundle saveInstanceState)
+- OnCreate(Bundle saveInstanceState)
 
 Fragment가 처음 생성된 후 onAttach()가 끝나면 이 메서드가 호출됩니다. Activity.onCreate()와 마찬가지로 Fragment의 초기 설정들을 해줄 수 있으나 주의해야 될 점은 View와 관련된 설정은 할 수 없으며 이는 다음에 나오는 onCreateView() 함수에서 설정해야 합니다. 또한 Fragment 객체가 소멸되지 않도록 하는 함수인 [setRetainInstance()](https://developer.android.com/reference/android/support/v4/app/Fragment.html#setRetainInstance(boolean))가 true로 설정되어 있을 때 또한 호출되지 않으므로 이 부분에서는 Fragment가 완전히 처음 생성되었을때 초기화 해야되는 것들로만 구성해야 합니다.
 
-3. onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+- onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 
 Fragment에만 있는 생명주기 메서드로 Activity.onCreate() 처럼 View와 관련된 초기화를 해줄 수 있습니다. 주의해야할 점은 Activity 에서 View를 초기화 할때 쓰는 메서드인 findViewById()가 Fragment에는 없으므로 rootView = inflater.inflate() 메서드로 Fragment UI를 View형태로 만든 후 rootView.findViewById()로 View를 초기화 할 수 있습니다.
 
-4. onViewCreated(View view, Bundle saveInstanceState)
+- onViewCreated(View view, Bundle saveInstanceState)
 
 onCreateView()가 호출된 후 바로 호출되며 Fragment 내부의 View들이 초기화된 다음 시점입니다. 해당 Fragment 내부에 이 Fragment의 View 계층을 알아야 하는 클래스가 있을 경우 여기서 view 인자를 통하여 정보를 획득 할 수 있습니다.
 
-5. onActivityCreated(Bundle saveInstanceState)
+- onActivityCreated(Bundle saveInstanceState)
 
 Activity.onCreate()가 호출이 된 후 Activity에서 Fragment 인스턴스가 포함되면 호출되는 메서드이며 Fragment가 새로 만들어지거나 reAttach가 됐을 때만 호출되며 단순히 다른 Activity 밑으로 가려질 경우 호출되지 않습니다. Fragment에 저장해
 
-6. onViewStateRestored(Bundle saveInstanceState)
+- onViewStateRestored(Bundle saveInstanceState)
 
 onActivityCreated()가 호출된 후 onStart()로 넘어가기 전에 바로 호출되며 Fragment 소멸전 저장했던 상태들이 복원된 후 호출됩니다. 이 메서드는 onActivityCreated()가 호출되지 않으면 호출되지 않습니다.
 
-7. onStart() ~ onStop()
+- onStart() ~ onStop()
 
 Activity.onStart()가 실행되면 같이 호출됩니다. 여기서부터 onStop() 까지는 Activity와 생명주기를 같이하게 됩니다.
 
-8. onSaveInstanceState(Bundle outstate)
+- onSaveInstanceState(Bundle outstate)
 
 Activity.onSaveInstanceState()처럼 Fragment 재생성 시 저장되어야할 Bundle 정보들을 여기서 저장할 수 있습니다. Android 공식 문서에서는 여기서 저장한 정보들을 onCreate(), onCreateView(), onActivityCreated() 등에서 복원할 수 있다고 하며 개인적인 추천은 Fragment가 Activity에 완전히 포함되어 인스턴스화 된 시점인 onActivityCreated()에서 복원할 것을 추천드립니다.
 
-9. onDestroyView()
+- onDestroyView()
 
 onCreateView()로 생성된 View들이 Fragment로부터 분리되고 해제될때 호출됩니다. onDestroy() 호출전에 호출됩니다.
 
-10. onDestroy()
+- onDestroy()
 
 Fragment가 더이상 사용되지 않을 시 호출되며 onCreate()와 마찬가지로 setRetainInstance() 가 true로 설정되어 있으면 이 또한 호출되지 않습니다.
 
-11. onDetach()
+- onDetach()
 
 Activity로부터 Fragment가 완전히 분리되었을때 호출됩니다.
 
